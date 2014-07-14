@@ -339,7 +339,7 @@
                             India</address>
                     </div> <!-- //#contact .info -->
 
-                    <form action="/" method="post" class="in finr">
+                    <form action="" method="post" class="in finr">
                         <h1>Register Here</h1>
                         <address class="vxs">SMVDU,
                             Katra,Jammu & Kashmir,
@@ -353,18 +353,54 @@
                                 <i></i>
                                 <input type="email" name="email" placeholder="Email Address">
                             </div>
+                            <div class="item name">
+                                <i></i>
+                                <input type="password" name="pass" placeholder="Account Password" style="border:0px;position:relative;top:-5px;">
+                            </div>
+                            <div class="item name">
+                                <i></i>
+                                <input type="password" name="repass" placeholder="Confirm Password" style="border:0px;position:relative;top:-5px;">
+                            </div>
+
                             <div class="item phone">
                                 <i></i>
                                 <input type="text" name="phone" placeholder="Phone Number">
                             </div>
-                            <div class="item message">
-                                <i></i>
-                                <textarea name="message" placeholder="Message"></textarea>
-                            </div>
+                            
+
                             <input type="hidden" value="en" name="lang">
+                            <input type="hidden" name="button1" value="signup">
                             <button type="submit" name="send">Register Now</button>
                         </div>
                     </form> <!-- // #contact form -->
+
+
+<?php
+
+include("public\php\connect.php");
+if(isset($_REQUEST["button1"]))
+{
+if($_REQUEST["button1"]=="signup")
+{
+$_REQUEST["button1"]="";
+if(isset($_REQUEST["name"])&&isset($_REQUEST["email"])&&isset($_REQUEST["phone"])&&isset($_REQUEST["pass"])&&isset($_REQUEST["repass"]))
+{
+                if($_REQUEST["pass"]!=$_REQUEST["repass"])
+                echo "Password do not match";
+                else
+                {
+                    $query="Insert into useraccount (username,password,email,phone)values('".$_REQUEST["name"]."','".$_REQUEST["pass"]."','".$_REQUEST["email"]."','".$_REQUEST["phone"]."')";
+                    $result=mysql_query($query)
+                    or die("Query_failed :" .mysql_error());
+                    $rem=mysql_query($quer) or die("Quer fail :".mysql_error());
+                    echo "User created successfully.";
+                }
+}
+}
+}
+mysql_close($mysql);
+?>
+
 
                 </div> <!-- // .content -->
 
@@ -384,17 +420,16 @@
         </div> <!-- // .overlay -->
 
         <div id="careers" class="box-overlay in" data-title="Events">
-            <a href="#" class="close">Close</a>
+            <a href="#" class="close" style="z-index:3000">Exit</a>
             <div class="content">
-                <div class="inner">
+                <div class="inner" style="position:absolute;top:5px;height:100%;">
 
-                <img src="public/img/coming-soon.jpg" alt="">
+                <iframe src="GridGallery" width="100%" height="100%" __idm_frm__="20" style="z-index:2000;top:20px;"></iframe>
 
                 </div> <!-- // .inner -->
             </div> <!-- // .content -->
         </div> <!-- // .overlay -->
-        
-        <div id="story" class="box-overlay in" data-title="Story"></div>
+            
 
         <script>
             var base_title = 'Titiksha 2k14 | Annual tech-fest of Shri Mata Vaishno Devi University';
